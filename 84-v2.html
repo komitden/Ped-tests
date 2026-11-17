@@ -1,0 +1,1772 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Неонатологія — Тренувальне тестування</title>
+  <style>
+    :root {
+      --bg-body: #f1f5f9;
+      --bg-surface: #ffffff;
+      --bg-subtle: #f8fafc;
+      --bg-hover: #f1f5f9;
+      --text-primary: #0f172a;
+      --text-secondary: #475569;
+      --text-muted: #94a3b8;
+      --border: #e2e8f0;
+      --border-strong: #cbd5e1;
+      --primary: #0284c7;
+      --primary-hover: #0369a1;
+      --primary-soft: #e0f2fe;
+      --primary-text: #0369a1;
+      --success: #16a34a;
+      --success-soft: #dcfce7;
+      --success-border: #86efac;
+      --success-text: #15803d;
+      --danger: #dc2626;
+      --danger-soft: #fee2e2;
+      --danger-border: #fca5a5;
+      --danger-text: #b91c1c;
+      --warning: #d97706;
+      --warning-soft: #fef3c7;
+      --shadow-sm: 0 1px 2px rgba(15, 23, 42, 0.05);
+      --shadow-md: 0 4px 12px rgba(15, 23, 42, 0.06);
+      --shadow-lg: 0 10px 25px rgba(15, 23, 42, 0.08);
+      --radius-sm: 8px;
+      --radius-md: 12px;
+      --radius-lg: 16px;
+      --radius-xl: 20px;
+    }
+
+    [data-theme="dark"] {
+      --bg-body: #0b1120;
+      --bg-surface: #1e293b;
+      --bg-subtle: #0f172a;
+      --bg-hover: #334155;
+      --text-primary: #f8fafc;
+      --text-secondary: #cbd5e1;
+      --text-muted: #64748b;
+      --border: #334155;
+      --border-strong: #475569;
+      --primary: #38bdf8;
+      --primary-hover: #7dd3fc;
+      --primary-soft: rgba(56, 189, 248, 0.15);
+      --primary-text: #7dd3fc;
+      --success: #22c55e;
+      --success-soft: rgba(34, 197, 94, 0.16);
+      --success-border: rgba(34, 197, 94, 0.45);
+      --success-text: #4ade80;
+      --danger: #ef4444;
+      --danger-soft: rgba(239, 68, 68, 0.16);
+      --danger-border: rgba(239, 68, 68, 0.45);
+      --danger-text: #f87171;
+      --warning: #f59e0b;
+      --warning-soft: rgba(245, 158, 11, 0.16);
+      --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+      --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.35);
+      --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.45);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      background-color: var(--bg-body);
+      color: var(--text-primary);
+      line-height: 1.55;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      transition: background-color 0.2s ease, color 0.2s ease;
+    }
+
+    /* Header */
+    .header {
+      background: var(--bg-surface);
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .header-inner {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 12px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .brand-icon {
+      width: 38px;
+      height: 38px;
+      border-radius: 10px;
+      background: var(--primary-soft);
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .brand-title {
+      font-weight: 700;
+      font-size: 16px;
+      letter-spacing: -0.01em;
+    }
+
+    .brand-sub {
+      font-size: 12px;
+      color: var(--text-secondary);
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      font-family: inherit;
+      font-size: 14px;
+      font-weight: 600;
+      padding: 10px 16px;
+      border-radius: var(--radius-md);
+      border: 1px solid transparent;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      user-select: none;
+    }
+
+    .btn:active {
+      transform: scale(0.98);
+    }
+
+    .btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: #ffffff;
+    }
+
+    [data-theme="dark"] .btn-primary {
+      color: #0f172a;
+    }
+
+    .btn-primary:hover:not(:disabled) {
+      background: var(--primary-hover);
+    }
+
+    .btn-secondary {
+      background: var(--bg-subtle);
+      color: var(--text-primary);
+      border-color: var(--border);
+    }
+
+    .btn-secondary:hover:not(:disabled) {
+      background: var(--bg-hover);
+    }
+
+    .btn-danger-soft {
+      background: var(--danger-soft);
+      color: var(--danger-text);
+      border-color: var(--danger-border);
+    }
+
+    .btn-danger-soft:hover:not(:disabled) {
+      opacity: 0.9;
+    }
+
+    .btn-icon {
+      width: 38px;
+      height: 38px;
+      padding: 0;
+      border-radius: 10px;
+      background: var(--bg-subtle);
+      color: var(--text-secondary);
+      border: 1px solid var(--border);
+    }
+
+    .btn-icon:hover {
+      background: var(--bg-hover);
+      color: var(--text-primary);
+    }
+
+    .btn-lg {
+      padding: 14px 24px;
+      font-size: 16px;
+      border-radius: var(--radius-lg);
+    }
+
+    /* Container */
+    .container {
+      max-width: 900px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 20px 16px 48px;
+      flex: 1;
+    }
+
+    /* Cards */
+    .card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-xl);
+      padding: 24px;
+      box-shadow: var(--shadow-md);
+      margin-bottom: 16px;
+    }
+
+    @media (max-width: 600px) {
+      .card {
+        padding: 18px 16px;
+        border-radius: var(--radius-lg);
+      }
+    }
+
+    .section-title {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .section-desc {
+      font-size: 14px;
+      color: var(--text-secondary);
+      margin-bottom: 18px;
+    }
+
+    /* Mode Tabs on Start Screen */
+    .mode-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 10px;
+      margin-bottom: 18px;
+    }
+
+    .mode-pill {
+      padding: 12px 14px;
+      border-radius: var(--radius-md);
+      border: 2px solid var(--border);
+      background: var(--bg-subtle);
+      color: var(--text-primary);
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .mode-pill:hover {
+      border-color: var(--primary);
+    }
+
+    .mode-pill.active {
+      border-color: var(--primary);
+      background: var(--primary-soft);
+      color: var(--primary-text);
+    }
+
+    .mode-pill-title {
+      font-weight: 700;
+      font-size: 15px;
+    }
+
+    .mode-pill-sub {
+      font-size: 12px;
+      color: var(--text-secondary);
+      margin-top: 2px;
+    }
+
+    .mode-pill.active .mode-pill-sub {
+      color: var(--primary-text);
+      opacity: 0.85;
+    }
+
+    /* Range Selector */
+    .range-box {
+      display: none;
+      background: var(--bg-subtle);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 14px;
+      margin-bottom: 18px;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .range-box.visible {
+      display: flex;
+    }
+
+    .range-input {
+      width: 84px;
+      padding: 8px 10px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border-strong);
+      background: var(--bg-surface);
+      color: var(--text-primary);
+      font-size: 15px;
+      font-weight: 600;
+      text-align: center;
+    }
+
+    /* Toggle Switches */
+    .toggles-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 22px;
+    }
+
+    .toggle-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      padding: 12px 14px;
+      background: var(--bg-subtle);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .toggle-info-title {
+      font-weight: 600;
+      font-size: 14px;
+    }
+
+    .toggle-info-desc {
+      font-size: 12px;
+      color: var(--text-secondary);
+    }
+
+    .switch {
+      position: relative;
+      width: 46px;
+      height: 26px;
+      flex-shrink: 0;
+    }
+
+    .switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    .slider {
+      position: absolute;
+      inset: 0;
+      background-color: var(--border-strong);
+      border-radius: 999px;
+      transition: 0.2s;
+    }
+
+    .slider::before {
+      content: "";
+      position: absolute;
+      height: 20px;
+      width: 20px;
+      left: 3px;
+      bottom: 3px;
+      background-color: #ffffff;
+      border-radius: 50%;
+      transition: 0.2s;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+    }
+
+    .switch input:checked + .slider {
+      background-color: var(--primary);
+    }
+
+    .switch input:checked + .slider::before {
+      transform: translateX(20px);
+    }
+
+    .start-actions {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 12px;
+    }
+
+    @media (max-width: 560px) {
+      .start-actions {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Quiz Top Bar */
+    .quiz-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+
+    .badges {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 5px 11px;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 600;
+      background: var(--bg-subtle);
+      border: 1px solid var(--border);
+      color: var(--text-secondary);
+    }
+
+    .badge-primary {
+      background: var(--primary-soft);
+      color: var(--primary-text);
+      border-color: transparent;
+    }
+
+    .badge-success {
+      background: var(--success-soft);
+      color: var(--success-text);
+      border-color: transparent;
+    }
+
+    .badge-danger {
+      background: var(--danger-soft);
+      color: var(--danger-text);
+      border-color: transparent;
+    }
+
+    .progress-track {
+      width: 100%;
+      height: 8px;
+      background: var(--bg-subtle);
+      border-radius: 999px;
+      overflow: hidden;
+      margin-bottom: 20px;
+      border: 1px solid var(--border);
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: var(--primary);
+      width: 0%;
+      transition: width 0.25s ease;
+      border-radius: 999px;
+    }
+
+    .question-orig-num {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .question-text {
+      font-size: 18px;
+      font-weight: 600;
+      line-height: 1.5;
+      margin-bottom: 22px;
+      color: var(--text-primary);
+    }
+
+    @media (max-width: 600px) {
+      .question-text {
+        font-size: 16.5px;
+      }
+    }
+
+    /* Options */
+    .options-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 22px;
+    }
+
+    .option-btn {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      width: 100%;
+      text-align: left;
+      padding: 14px 16px;
+      border-radius: var(--radius-md);
+      border: 2px solid var(--border);
+      background: var(--bg-surface);
+      color: var(--text-primary);
+      font-family: inherit;
+      font-size: 15px;
+      line-height: 1.45;
+      cursor: pointer;
+      transition: all 0.14s ease;
+    }
+
+    .option-btn:hover:not(.locked) {
+      border-color: var(--primary);
+      background: var(--bg-subtle);
+    }
+
+    .option-letter {
+      width: 30px;
+      height: 30px;
+      border-radius: 8px;
+      background: var(--bg-subtle);
+      border: 1px solid var(--border-strong);
+      color: var(--text-secondary);
+      font-weight: 700;
+      font-size: 13px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 1px;
+      transition: all 0.14s ease;
+    }
+
+    .option-btn.selected {
+      border-color: var(--primary);
+      background: var(--primary-soft);
+    }
+
+    .option-btn.selected .option-letter {
+      background: var(--primary);
+      border-color: var(--primary);
+      color: #ffffff;
+    }
+
+    [data-theme="dark"] .option-btn.selected .option-letter {
+      color: #0f172a;
+    }
+
+    .option-btn.correct {
+      border-color: var(--success);
+      background: var(--success-soft);
+    }
+
+    .option-btn.correct .option-letter {
+      background: var(--success);
+      border-color: var(--success);
+      color: #ffffff;
+    }
+
+    .option-btn.wrong {
+      border-color: var(--danger);
+      background: var(--danger-soft);
+    }
+
+    .option-btn.wrong .option-letter {
+      background: var(--danger);
+      border-color: var(--danger);
+      color: #ffffff;
+    }
+
+    .option-btn.locked {
+      cursor: default;
+    }
+
+    .quiz-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+      padding-top: 14px;
+      border-top: 1px solid var(--border);
+    }
+
+    .kbd-hint {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    @media (max-width: 640px) {
+      .kbd-hint {
+        display: none;
+      }
+    }
+
+    /* Navigator Dots */
+    .nav-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 16px;
+      padding-top: 16px;
+      border-top: 1px solid var(--border);
+    }
+
+    .nav-dot {
+      width: 30px;
+      height: 30px;
+      border-radius: 7px;
+      border: 1px solid var(--border);
+      background: var(--bg-subtle);
+      color: var(--text-secondary);
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .nav-dot.current {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 2px var(--primary-soft);
+      font-weight: 700;
+      color: var(--primary-text);
+    }
+
+    .nav-dot.answered {
+      background: var(--primary-soft);
+      color: var(--primary-text);
+      border-color: var(--primary);
+    }
+
+    .nav-dot.dot-correct {
+      background: var(--success-soft);
+      color: var(--success-text);
+      border-color: var(--success-border);
+    }
+
+    .nav-dot.dot-wrong {
+      background: var(--danger-soft);
+      color: var(--danger-text);
+      border-color: var(--danger-border);
+    }
+
+    /* Results Screen */
+    .score-hero {
+      text-align: center;
+      padding: 12px 0 20px;
+    }
+
+    .score-circle {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      margin: 0 auto 14px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: var(--primary-soft);
+      border: 4px solid var(--primary);
+      color: var(--primary-text);
+    }
+
+    .score-circle.high {
+      background: var(--success-soft);
+      border-color: var(--success);
+      color: var(--success-text);
+    }
+
+    .score-circle.low {
+      background: var(--danger-soft);
+      border-color: var(--danger);
+      color: var(--danger-text);
+    }
+
+    .score-percent {
+      font-size: 30px;
+      font-weight: 800;
+      line-height: 1.1;
+    }
+
+    .score-label {
+      font-size: 12px;
+      font-weight: 600;
+      opacity: 0.85;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .stat-box {
+      background: var(--bg-subtle);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 12px;
+      text-align: center;
+    }
+
+    .stat-val {
+      font-size: 20px;
+      font-weight: 800;
+    }
+
+    .stat-lbl {
+      font-size: 12px;
+      color: var(--text-secondary);
+    }
+
+    .result-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+    }
+
+    /* Review & Cheat Sheet Items */
+    .search-bar {
+      position: relative;
+      margin-bottom: 16px;
+    }
+
+    .search-input {
+      width: 100%;
+      padding: 12px 16px 12px 42px;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border-strong);
+      background: var(--bg-subtle);
+      color: var(--text-primary);
+      font-family: inherit;
+      font-size: 15px;
+    }
+
+    .search-input:focus {
+      outline: none;
+      border-color: var(--primary);
+      background: var(--bg-surface);
+    }
+
+    .search-icon {
+      position: absolute;
+      left: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-muted);
+      pointer-events: none;
+    }
+
+    .review-item {
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 16px;
+      margin-bottom: 12px;
+      background: var(--bg-subtle);
+    }
+
+    .review-item.is-wrong {
+      border-left: 4px solid var(--danger);
+    }
+
+    .review-item.is-correct {
+      border-left: 4px solid var(--success);
+    }
+
+    .review-q {
+      font-weight: 600;
+      font-size: 15px;
+      margin-bottom: 10px;
+    }
+
+    .review-opt {
+      padding: 7px 11px;
+      border-radius: 8px;
+      font-size: 14px;
+      margin-bottom: 5px;
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+    }
+
+    .review-opt.opt-correct {
+      background: var(--success-soft);
+      color: var(--success-text);
+      font-weight: 600;
+    }
+
+    .review-opt.opt-user-wrong {
+      background: var(--danger-soft);
+      color: var(--danger-text);
+      text-decoration: line-through;
+    }
+
+    /* Modal */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.55);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+      z-index: 100;
+    }
+
+    .modal-backdrop.open {
+      display: flex;
+    }
+
+    .modal-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-xl);
+      padding: 24px;
+      max-width: 420px;
+      width: 100%;
+      box-shadow: var(--shadow-lg);
+    }
+
+    .modal-title {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .modal-text {
+      font-size: 14px;
+      color: var(--text-secondary);
+      margin-bottom: 20px;
+    }
+
+    .modal-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="header-inner">
+      <div class="brand" id="homeBtn" title="На головну">
+        <div class="brand-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M11 2a2 2 0 0 0-2 2v5H4a2 2 0 0 0-2 2v2c0 1.1.9 2 2 2h5v5c0 1.1.9 2 2 2h2a2 2 0 0 0 2-2v-5h5a2 2 0 0 0 2-2v-2a2 2 0 0 0-2-2h-5V4a2 2 0 0 0-2-2h-2z"/>
+          </svg>
+        </div>
+        <div>
+          <div class="brand-title">Неонатологія • Тести</div>
+          <div class="brand-sub">Тренувальна база (84 питання)</div>
+        </div>
+      </div>
+
+      <div class="header-actions">
+        <button class="btn btn-secondary" id="headerCheatBtn" title="Відкрити базу з відповідями">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+          </svg>
+          <span>Шпаргалка</span>
+        </button>
+        <button class="btn btn-icon" id="themeToggleBtn" title="Змінити тему">
+          <svg id="themeIconSun" class="hidden" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+          </svg>
+          <svg id="themeIconMoon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+
+    <!-- 1. START SCREEN -->
+    <section id="startScreen">
+      <div class="card">
+        <h1 class="section-title">Налаштування тестування</h1>
+        <p class="section-desc">Обери кількість питань та режим проходження для підготовки до заліку чи іспиту.</p>
+
+        <div class="mode-grid" id="countModeGrid">
+          <div class="mode-pill active" data-mode="all">
+            <div class="mode-pill-title">Усі 84</div>
+            <div class="mode-pill-sub">Повна база</div>
+          </div>
+          <div class="mode-pill" data-mode="20">
+            <div class="mode-pill-title">20 питань</div>
+            <div class="mode-pill-sub">Швидкий тест</div>
+          </div>
+          <div class="mode-pill" data-mode="30">
+            <div class="mode-pill-title">30 питань</div>
+            <div class="mode-pill-sub">Стандартний</div>
+          </div>
+          <div class="mode-pill" data-mode="50">
+            <div class="mode-pill-title">50 питань</div>
+            <div class="mode-pill-sub">Розширений</div>
+          </div>
+          <div class="mode-pill" data-mode="range">
+            <div class="mode-pill-title">Діапазон</div>
+            <div class="mode-pill-sub">Вибір номерів</div>
+          </div>
+        </div>
+
+        <div class="range-box" id="rangeBox">
+          <span style="font-size: 14px; font-weight: 600;">Питання з №</span>
+          <input type="number" id="rangeFrom" class="range-input" min="1" max="84" value="1">
+          <span style="font-size: 14px; font-weight: 600;">по №</span>
+          <input type="number" id="rangeTo" class="range-input" min="1" max="84" value="42">
+          <span style="font-size: 13px; color: var(--text-secondary);" id="rangeCountLabel">(42 питання)</span>
+        </div>
+
+        <div class="toggles-list">
+          <label class="toggle-row">
+            <div>
+              <div class="toggle-info-title">Перемішувати питання</div>
+              <div class="toggle-info-desc">Випадковий порядок питань при кожному запуску</div>
+            </div>
+            <div class="switch">
+              <input type="checkbox" id="optShuffleQ" checked>
+              <span class="slider"></span>
+            </div>
+          </label>
+
+          <label class="toggle-row">
+            <div>
+              <div class="toggle-info-title">Перемішувати варіанти відповідей</div>
+              <div class="toggle-info-desc">Щоб запам'ятовувати суть, а не літеру (A–E)</div>
+            </div>
+            <div class="switch">
+              <input type="checkbox" id="optShuffleO" checked>
+              <span class="slider"></span>
+            </div>
+          </label>
+
+          <label class="toggle-row">
+            <div>
+              <div class="toggle-info-title">Миттєва перевірка відповіді</div>
+              <div class="toggle-info-desc">Показувати правильну відповідь одразу (вимкніть для режиму Іспиту)</div>
+            </div>
+            <div class="switch">
+              <input type="checkbox" id="optInstant" checked>
+              <span class="slider"></span>
+            </div>
+          </label>
+        </div>
+
+        <div class="start-actions">
+          <button class="btn btn-primary btn-lg" id="startQuizBtn">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+              <polygon points="5 3 19 12 5 21 5 3"/>
+            </svg>
+            Розпочати тестування
+          </button>
+          <button class="btn btn-secondary btn-lg" id="openCheatBtn">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+            </svg>
+            Шпаргалка
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. QUIZ SCREEN -->
+    <section id="quizScreen" class="hidden">
+      <div class="card">
+        <div class="quiz-meta">
+          <div class="badges">
+            <span class="badge badge-primary" id="qCounterBadge">Питання 1 / 84</span>
+            <span class="badge" id="timerBadge">00:00</span>
+            <span class="badge badge-success" id="correctBadge">✓ 0</span>
+            <span class="badge badge-danger" id="wrongBadge">✕ 0</span>
+          </div>
+          <button class="btn btn-danger-soft" id="finishEarlyBtn" style="padding: 6px 12px; font-size: 13px;">
+            Завершити
+          </button>
+        </div>
+
+        <div class="progress-track">
+          <div class="progress-fill" id="progressFill"></div>
+        </div>
+
+        <div class="question-orig-num" id="origNumLabel">База №1</div>
+        <div class="question-text" id="questionText"></div>
+
+        <div class="options-list" id="optionsList"></div>
+
+        <div class="quiz-footer">
+          <button class="btn btn-secondary" id="prevBtn">← Назад</button>
+          <span class="kbd-hint">Клавіші: 1–5 вибір, Enter — далі</span>
+          <button class="btn btn-primary" id="nextBtn">Далі →</button>
+        </div>
+
+        <div class="nav-grid" id="navGrid"></div>
+      </div>
+    </section>
+
+    <!-- 3. RESULTS SCREEN -->
+    <section id="resultsScreen" class="hidden">
+      <div class="card">
+        <div class="score-hero">
+          <div class="score-circle" id="scoreCircle">
+            <div class="score-percent" id="scorePercent">0%</div>
+            <div class="score-label">результат</div>
+          </div>
+          <h2 id="resultVerdict" style="font-size: 22px; font-weight: 800; margin-bottom: 4px;">Тест завершено!</h2>
+          <p id="resultSubtext" style="color: var(--text-secondary); font-size: 14px;"></p>
+        </div>
+
+        <div class="stats-grid">
+          <div class="stat-box">
+            <div class="stat-val" style="color: var(--success);" id="statCorrect">0</div>
+            <div class="stat-lbl">Правильно</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-val" style="color: var(--danger);" id="statWrong">0</div>
+            <div class="stat-lbl">Помилок</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-val" id="statTime">00:00</div>
+            <div class="stat-lbl">Час</div>
+          </div>
+        </div>
+
+        <div class="result-actions">
+          <button class="btn btn-primary" id="retryMistakesBtn">
+            Робота над помилками
+          </button>
+          <button class="btn btn-secondary" id="restartSameBtn">
+            Пройти ще раз
+          </button>
+          <button class="btn btn-secondary" id="toMenuBtn">
+            На головну
+          </button>
+        </div>
+      </div>
+
+      <div class="card">
+        <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px; margin-bottom: 16px;">
+          <h3 class="section-title" style="margin: 0;">Розбір відповідей</h3>
+          <label style="display: inline-flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 600; cursor: pointer;">
+            <input type="checkbox" id="onlyMistakesFilter" style="width: 16px; height: 16px; accent-color: var(--primary);">
+            Показати тільки помилки
+          </label>
+        </div>
+        <div id="reviewList"></div>
+      </div>
+    </section>
+
+    <!-- 4. CHEAT SHEET / SEARCH SCREEN -->
+    <section id="cheatScreen" class="hidden">
+      <div class="card">
+        <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px; margin-bottom: 14px;">
+          <div>
+            <h2 class="section-title" style="margin: 0;">Шпаргалка та пошук по базі</h2>
+            <p class="section-desc" style="margin: 2px 0 0;">Усі 84 питання з підсвіченими правильними відповідями</p>
+          </div>
+          <button class="btn btn-secondary" id="closeCheatBtn">← До налаштувань</button>
+        </div>
+
+        <div class="search-bar">
+          <svg class="search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+          </svg>
+          <input type="text" id="cheatSearchInput" class="search-input" placeholder="Введіть ключове слово (наприклад: Апгар, Сільвермана, білірубін, вітамін К)...">
+        </div>
+
+        <div id="cheatCountInfo" style="font-size: 13px; color: var(--text-secondary); margin-bottom: 12px;">Знайдено питань: 84</div>
+        <div id="cheatList"></div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Custom Confirm Modal -->
+  <div class="modal-backdrop" id="confirmModal">
+    <div class="modal-card">
+      <div class="modal-title" id="modalTitle">Завершити тестування?</div>
+      <div class="modal-text" id="modalText">Ви відповіли не на всі питання. Завершити тест зараз та переглянути результати?</div>
+      <div class="modal-actions">
+        <button class="btn btn-secondary" id="modalCancelBtn">Продовжити тест</button>
+        <button class="btn btn-primary" id="modalConfirmBtn">Завершити</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Повна база тестів (84 питання)
+    const RAW_QUESTIONS = [
+      {"q": "Дитина народилася з оцінкою за шкалою Апгар 8–9 балів. Коли її слід прикласти до грудей?", "o": ["Через 30 хвилин після народження", "Відразу після народження", "Після обробки пуповини", "Після обробки пуповини та проведення профілактики гонобленореї", "Через 2 години після народження"], "a": 1},
+      {"q": "Який препарат необхідно ввести дитині, яка народжена шляхом кесарського розтину, у стані асфіксії при відсутності самостійного дихання на першій хвилині життя?", "o": ["Кофеін-бензоат натрію", "Етимізол", "Налоксону гідрохлорид", "Кордіамін", "Натрію бікарбонат"], "a": 2},
+      {"q": "Хлопчик 10 діб, народився від перших нормальних пологів з масою тіла 3,600. З перших днів життя відмічаються непостійна активна блювота 1-2 рази на добу. Блювотні маси без домішку жовчі. Масу тіла набирає повільно. Випорожнення помірні. Про яку патологію можна подумати?", "o": ["Незакінчений поворот кишківника", "Пілороспазм", "Адреногенітальний синдром", "Пілоростеноз", "Гострий гастрит"], "a": 1},
+      {"q": "Новонароджена дитина, термін гестації у матері - 42 тижні. Навколоплідні води з домішками меконію. На третій хвилині після народження у неї відмічені ознаки синдрому дихальних розладів, аускультативно в легенях - велика кількість вологих хрипів. Рентгенологічно спостерігаються зливні вогнища ущільнення легеневої тканини. Який імовірний діагноз?", "o": ["Вроджений сепсис", "Аспіраційна пневмонія", "Розсіяні ателектази легенів", "Черепно-мозкова травма", "Вроджена діафрагмальна кила"], "a": 1},
+      {"q": "У новонародженого на 1-й хвилині після народження: ЧДР- 26/хв., ЧСС- 90/хв., м'язовий тонус низький. Під час відсмоктування катетером із носа та рота дитина реагує гримасою, шкіра ціанотична. Аускультативно: над легенями ослаблене везикулярне дихання. Тони серця звучні. Через 5 хвилин: ЧДР- 40/хв, ритмічне, ЧСС- 120/хв, акроціаноз, м'язовий тонус знижений. Який найбільш вірогідний діагноз?", "o": ["Асфіксія новонародженого", "Пологова травма новонародженого", "Гемолітична хвороба новонародженого", "Геморагічна хвороба новонародженого", "Сепсис новонародженого"], "a": 0},
+      {"q": "Новонароджений від Rh-негативної матері. Пологи термінові, вагітність ІІ (І – здорова доношена дитина). Тактика післянатальної діагностики?", "o": ["Визначити Rh-приналежність і білірубін пуповинної крові", "Визначити групу і Rh-приналежність", "Визначити білірубін пуповинної крові, загальний аналіз крові", "Визначити АЛТ і АСТ, пробу Кумбса", "Визначити погодинний приріст рівня білірубіну"], "a": 0},
+      {"q": "Недоношений хлопчик першої доби життя, народився на 29-му тижні гестації від вагітності з хронічною фетоплацентарною недостатністю, загрозою переривання. Маса тіла при народженні 1200 г, зріст 38 см, оцінка за шкалою Апгар 3/4 бали. Самостійного дихання немає, проводиться ШВЛ. Діагностовано респіраторний дистрес-синдром, розсіяні ателектази легень. Який препарат слід призначити в першу чергу?", "o": ["Амброксол внутрішньовенно", "Дексаметазон внутрішньовенно", "Еуфілін інтратрахеально", "Етімізол внутрішньовенно", "Альвеофакт інтратрахеально"], "a": 4},
+      {"q": "У новонародженої дитини з групою крові А(II) Rh+, що народилася від матері з групою крові 0(І), Rh+ на 2 добу життя виникла жовтяниця, рівень загального білірубіну склав 310 мкмоль/л за рахунок переважання непрямої фракції. Трансамінази у сироватці крові дорівнюють нормальним значенням. Який попередній діагноз слід встановити дитині?", "o": ["Гемолітична хвороба новонароджених по АВО, жовтянична форма", "Гемолітична хвороба новонароджених по Rh +, жовтянична форма", "Фетальний гепатит", "Атрезія жовчних протоків", "Синдром Жильбера"], "a": 0},
+      {"q": "У новонародженої дитини констатовано інтранатальну асфіксію. При відсмоктуванні слизу з верхніх дихальних шляхів у вмісті виявлені домішки меконію. Самостійного дихання немає. Подальша дія неонатолога передбачає:", "o": ["Введення адреналіну", "Зовнішній масаж серця", "Застосування 100% кисню", "Інтубацію трахеї, санацію дихальних шляхів", "Тактильну стимуляцію дихання"], "a": 3},
+      {"q": "Доношена дитини перенесла анте- та інтранатальну гіпоксію, народилася в асфіксії (оцінка за шкалою Апгар 2-5 балів). Після народження у дитини прогресує збудження, відмічається блювання, ністагм, судоми, косоокість, спонтанні рефлекси Моро і Бабинського. Яка найбільш вірогідна локалізація внутрішньо-черепного крововиливу в даному випадку?", "o": ["Субдуральні крововиливи", "Дрібні крововиливи в тканину мозку", "Субарахноїдальні крововиливи", "Перивентрикулярні крововиливи", "Крововиливи в шлуночки мозку"], "a": 2},
+      {"q": "Дитина народилася від ІІІ-ї вагітності, ІІ-х пологів. Вагітність протікала на фоні анемії, гестозу ІІ половини. Термін гестації 35 тижнів, з масою - 2200; довжиною - 45 см. Оцінка за шкалою Апгар 6/7 балів. Через 6 годин появилися дихальні розлади: пародоксальне дихання, різке втягнення міжреберних проміжків, западіння грудини, виражений периоральний ціаноз, западіння нижньої щелепи, при аускультації - подовжений видих. В скільки балів за шкалою Сільвермана треба оцінити дитину?", "o": ["4 бали", "5 балів", "6 балів", "7 балів", "8 балів"], "a": 4},
+      {"q": "Дитина народилася при терміні гестації 30 тижнів, з масою - 1100,0, через 3 години після народження з’явилися часті апное, дихання по типу “gasps”, ЧСС 98 в хв. Оцінка за шкалою Сільвермана 9 балів. Додаткова оксиногенація не привела до покращення стану. Що необхідно зробити?", "o": ["Почати штучну вентиляцію легень", "Почати тактильну стимуляцію", "Почати інтубувати трахею", "Почати штучну вентиляцію легень під позитивним тиском", "Почати непрямий масаж серця"], "a": 3},
+      {"q": "У немовляти на 3-тю добу після народження з’явилося часте блювання шлунковим вмістом, об’єм блювотних мас невеликий, не перевищує об’єму одного годування. Стан дитини задовільний, шкіра волога, тургор збережений. Живіт звичайної форми, при пальпації м’який, неболючий. Після призначення 0,1% розчину атропіну блювання припинилося. Яким є найбільш імовірний діагноз?", "o": ["Синдром Ледда", "Пілоростеноз", "Пілороспазм", "Синдром мегадуоденум", "Атрезія тонкої кишки"], "a": 2},
+      {"q": "В новонародженого у віці одного дня виникла жовтяниця. Загальний білірубін сироватки крові 144 мкмоль/л, непрямий білірубін 130 мкмоль/л. Тест Кумбса позитивний. Дитина від першої вагітності. Мати має ґрупу крові - 0(I) Rh(-). Найімовірніша причина жовтяниці?", "o": ["Фізіологічна жовтяниця", "Атрезія жовчевих шляхів", "Резус-несумісність", "АВ0-несумісність", "Фетальний гепатит"], "a": 3},
+      {"q": "У новонародженого з гемолітичною хворобою за Rh - фактором група крові 0 (I) Rh (+), у матері А (ІІ) Rh(-). Яку кров необхідно переливати при операції замінного переливання крові?", "o": ["О (I) Rh (-)", "O (I) Rh (+)", "A (II) Rh (-)", "A (II) Rh (+)", "В (III) Rh (-)"], "a": 0},
+      {"q": "У новонародженого з підозрою на внутрішньочерепну родову травму проведено люмбальну пункцію. Було отримано кров`янистий ліквор. Який крововилив має місце у цьому випадку?", "o": ["Супратенторіальний", "Кефалогематома", "Епідуральний", "Субарахноїдальний", "Субтенторіальний"], "a": 3},
+      {"q": "Новонароджений від вагітності з важким гестозом другої половини, народився на 41 тижні гестації, з вагою тіла 2400 г, зріст - 50 см. При об’єктивному обстеженні: шкіра бліда, підшкірно-жирова клітковина тонка, м’язова гіпотонія, рефлекси періоду новонародженості знижені. Внутрішні органи без патологічних змін. Як оцінити дану дитину?", "o": ["Переношений", "Недоношений", "Глибоко недоношений", "Затримка внутрішньоутробного розвитку", "Доношений з нормальною масою тіла"], "a": 3},
+      {"q": "Дитина 2 дiб, яка народилася на 34-ому тижнi вагiтності з масою 2200 г i оцiнкою за Апгар 6 балiв, має дихальнi розлади у виглядi втягнення мечовидного відростка та міжреберних промiжкiв, участi крил носа в диханнi. Перкуторних змiн немає, при аускультацiї - вологi рiзнокалiбернi хрипи з обох бокiв. Вродженi рефлекси викликаються. Акроцiаноз шкiри. Вкажiть найбiльш вiрогiдну причину дихальних розладiв.", "o": ["Хвороба гiалiнових мембран", "Первинний ателектаз легень", "Вроджена пневмонiя", "Аспiрацiйний синдром", "Пологова травма"], "a": 3},
+      {"q": "Дитина від ІІ вагітності, пологи в строк у жінки з І (0) групою крові, Rh (+). З перших днів життя у дитини мала місце жовтяниця, непрямий білірубін 328 ммоль/л. На 3 добу з'явились зригування, погане смоктання. Печінка та селезінка збільшені. Hb - 140 г/л, ер. 4×1012/л. Який найбільш вірогідний діагноз?", "o": ["Фетальний гепатит", "Фізіологічна жовтяниця", "Гемолітична хвороба новонароджених", "Кон'югаційна жовтяниця", "Атрезія жовчних шляхів"], "a": 2},
+      {"q": "Дитині 2 днi. Народилась доношеною з ознаками внутрiшньоутробного iнфiкування, в зв'язку з чим дитинi призначено антибiотики. Вкажiть, чому iнтервал мiж введенням антибiотикiв у новонароджених дiтей бiльший у порiвняннi зі старшими дiтьми i дорослими, а дози - нижчi?", "o": ["У новонароджених знажений рН кровi", "У новонароджених бiльш низька концентрацiя бiлка i альбумiнiв у кровi", "У новонароджених знижена активнiсть глюкуронiлтрансферази", "У новонароджених бiльш низький рiвень клубочкової фiльтрацiї", "У новонароджених бiльш високий гематокрит"], "a": 3},
+      {"q": "Доношений новонароджений з масою тіла 4500 г народився в асфіксії з оцінкою за шкалою Апгар 4-6 балів. В пологах утруднене виведення плечового поясу. У неврологічному статусі загальномозкові розлади, виявлений тотальний верхній млявий парез – ручка атонічна, пронована, не викликаються рефлекси - хапальний, Бабкіна, Моро. Укажіть сегменти ураження спинного мозку:", "o": ["СI - С II", "СIII - С IV", "СV - T I", "T I - T V", "T VI - T VІІ"], "a": 2},
+      {"q": "У новонародженого від I вагітності, з масою 3500 г з першої доби жовтяниця, млявість, зниження рефлексів. Об’єктивно: жовтушність шкіри II ст. із шафрановим відтінком, печінка + 2 см, селезінка +1 см. Сеча и випорожнення жовті. В аналізі крові: Нb – 100 г/л, ер. -3,2 Т/л, лейк.- 18,7 Г/л, кров матері 0(I) Rh (+), кров дитини А (II) Rh (-), білірубін – 170 мкмоль/л, фракція непряма. Рівень АЛТ, АСТ – у нормі. Яке захворювання імовірно у дитини?", "o": ["Внутрішньоутробний гепатит", "Гемолітична хвороба новонародженого, АВ0-конфлікт", "Гемолітична хвороба новонародженого, Rh-конфлікт", "Атрезія жовчовивідних шляхів", "Фізіологічна жовтяниця"], "a": 1},
+      {"q": "У новонародженого, що народився в результаті стрімких пологів, спостерігається парез м'язів кисті. Хапальний рефлекс відсутній, не вдається викликати долонно-ротовий рефлекс. Чутливість кисті відсутня. Який найбільш імовірний діагноз?", "o": ["Тотальне ураження плечового сплетення", "Парез діафрагми", "Парез Дюшена-Ерба", "Синдром Горнера-Бернара", "Парез Дежерін-Клюмпке"], "a": 4},
+      {"q": "У доношеного хлопчика на 2-гу добу життя виникла помірна жовтяниця шкіри та слизових оболонок. Загальний стан дитини не порушений. У крові: непряма гіпербілірубінемія - 120 мкмоль/л. Група крові дитини А(ІІ) Rh(+), група крові матері В(ІІІ) Rh (+). Якою повинна бути тактика лікаря?", "o": ["Призначити холекінетики", "Провести замінне переливання крові", "Утриматись від медикаментозної терапії", "Призначити ентеросорбенти", "Призначити преднізолон"], "a": 2},
+      {"q": "У 3-х денної доношеної новонародженої дитини спостерігається рівень непрямого білірубіну - 345 мкмоль/л, погодинний приріст - 6,8 мкм/л. Стан дитини важкий: зниження рефлексів, гіпотонія м'язів, тремор кінцівок. Кров дитини та матері несумісна за Rh-фактором. Який метод лікування найбільш ефективний?", "o": ["Кортикостероїдна терапія", "Фототерапія", "Прийом фенобарбіталу", "Замінне переливання одногрупної та Rh-сумісної крові", "Гемосорбція"], "a": 3},
+      {"q": "У доношеної дитини на 3-тю добу з'явились геморагії на шкірі, криваве блювання, мелена. Діагностована геморагічна хвороба новонароджених. Який препарат необхідний дитині у якості невідкладної допомоги?", "o": ["Еритроцитарна маса", "Хлористий кальцій", "Етамзилат", "Тромбоцитарна маса", "Свіжозаморожена плазма"], "a": 4},
+      {"q": "У новонародженого у віці 32 тижні гестації через 2 години після пологів з’явилися прогресуючий ціаноз, задишка, роздування крил носа, втягнення міжребер’їв, ослаблене дихання. Оцінка за шкалою Сільвермана – 4 бали. Рентгендослідження грудної клітки виявило нодозно-ретикулярний малюнок легень, знижену пневматизацію. Який діагноз найбільш імовірний?", "o": ["Пневмоторакс", "Вроджена пневмонія", "РДС", "Вроджена вада серця", "Інтранатальна асфіксія"], "a": 2},
+      {"q": "У доношеної дитини є кефалогематома. На 2-у добу з’явилася жовтяниця, на 3-ю добу – змінився неврологічний стан (ністагм, симптом Грефе). Сеча жовта, випорожнення жовтого кольору. Група крові матері А(ІІ) Rh+, дитини – А(ІІ) Rh+. На третю добу білірубін в крові – 58 мкмоль/л за рахунок непрямої фракції. Чим пояснити жовтяницю дитини?", "o": ["Гемолітична хвороба новонароджених", "Атрезія жовчовивідних шляхів", "Фізіологічна жовтяниця", "Черепно-мозковий крововилив", "Фетальний гепатит"], "a": 3},
+      {"q": "У новонародженого 3-х діб годування майже завжди супроводжується виникненням задишки, нападоподібним кашлем, ціанозом, пінистими виділеннями з рота. Після їди при аускультації кількість вологих великопухирчатих хрипів у легенях збільшується. Годування через зонд не супроводжується кашлем і наростаючим ціанозом. Який найбільш імовірний діагноз?", "o": ["Атрезія стравоходу", "Атрезія хоан", "Незрощення твердого піднебіння", "Діафрагмальна кила", "Стравохідно-трахеальна нориця"], "a": 4},
+      {"q": "Новонароджена дівчинка з оцінкою за шкалою Апгар на 1-5- й хвилинах 7-8 балів. Під час пологів спостерігалося короткочасне утруднення при виведенні плечового поясу. Після народження у дитини спостерігається порушення функції проксимального відділу та вимушене положення правої ручки. Плече повернуто досередини, лікоть розігнутий, відмічається пронація передпліччя, кисть зігнута у вигляді “руки ляльки”. Який клінічний діагноз у даної дитини?", "o": ["Внутрішньочерепний крововилив", "Травма грудного відділу хребта", "Остеомієліт правої ручки", "Парез Дюшена-Ерба", "Травма м’яких тканин правої ручки"], "a": 3},
+      {"q": "У доношеної новонародженої дитини діагностована гемолітична хвороба новонароджених по резус-фактору. Цифри білірубіну критичні. Група крові дитини В(III), матері - А (II). Показано замінне переливання крові. Який добір донорської крові необхідний для цього?", "o": ["Група крові В (III), резус фактор негативний", "Група крові А (II), резус фактор негативний", "Група крові В (III), резус фактор позитивний", "Група крові А (II), резус фактор позитивний", "Група крові О (I), резус фактор негативний"], "a": 0},
+      {"q": "У недоношеної дитини, народженої в терміні гестації 34 тижні, через 4 години після народження спостерігається тахіпное, дихання по типу гойдалки, западання грудини, експіраторні шуми. Частота дихання 80 у хвилину. Над легенями прослуховується послаблене дихання з непостійними різнокаліберними хрипами. На рентгенограмі легенів - повітряна бронхограма та нодозно-ретикулярна сітка. Ваш діагноз:", "o": ["Пологова травма", "Ателектази легенів", "Синдром масивної меконіальної аспірації", "Хвороба гіалінових мембран", "Пневмонія новонароджених"], "a": 3},
+      {"q": "У дитини на 6-й день життя в ділянці потилиці, шиї та сідниць з'явилися пухирці, заповнені серозно-гнійним вмістом, які щільно вкривають шкіру. Загальний стан дитини не порушений. Про яке захворювання слід думати?", "o": ["Везикулопустульоз", "Пітниця", "Бульозний епідермоліз", "Імпетиго", "Пухирчатка новонароджених"], "a": 0},
+      {"q": "В лікуванні ранньої анемії у недоношених не мають важливого значення:", "o": ["Вітамін С", "Гемотрансфузії", "Фолієва кислота", "Препарати заліза", "Препарати еритропоетину"], "a": 1},
+      {"q": "До основних чинників ризику виникнення дефіцитної анемії у немовлят не відносяться:", "o": ["Швидкі темпи росту", "Залізодефіцитний раціон харчування", "Годування коров’ячим молоком", "Сукупність перинатальних втрат крові", "Внутрішньоутробна гіпоксія плода"], "a": 4},
+      {"q": "Для новонародженого прогресивне зниження рівня гемоглобіну протягом перших 2 місяців, що не відповідає на введення заліза зумовлено перерахованими факторами, за винятком:", "o": ["Збільшенням активності еритропоетину", "Високим руйнуванням еритроцитів, що обумовлено скороченням їх життя", "Зниженням продукції еритроцитів, обумовленим недостатністю еритропоетину", "Гемодилюції, обумовленої підвищенням об’єму крові при швидкому рості дитини", "Залізодефіцитним раціоном харчування"], "a": 0},
+      {"q": "Які діти не входять в групу ризику розвитку залізодефіцитної анемії:", "o": ["З малою масою при народженні", "Які харчуються цільним коров’ячим молоком до 8 місяців", "Із сімей з низьким соціально-економічним статусом", "Які перенесли гемолітичну хворобу новонародженого", "Які знаходяться на виключно грудному вигодовуванні без введення прикорму до 6-ти місяців життя"], "a": 4},
+      {"q": "Що є найбільш інформативним в діагностиці внутрішньочерепного крововиливу у новонароджених:", "o": ["Огляд очного дна", "Нейросонографія", "Ядерно-магнітний резонанс", "Консультація невропатолога", "Огляд нейрохірурга"], "a": 1},
+      {"q": "Гострий період при перинатальних ураженнях ЦНС триває:", "o": ["Перший місяць", "Два місяці", "Чотири місяці", "9 місяців", "Термін немає значення"], "a": 0},
+      {"q": "Новонароджена дитина від I-ої вагітності у терміні гестації 36 тижнів, з масою 2200г, довжиною 41 см. Жінка мешкає у селі, має кішку, собаку. Вагітність ускладнена токсикозом, відмічався субфебрилітет. Стан дитини після народження тяжкий: клінічні прояви перинатального пошкодження ЦНС, гіпертензійно-гідроцефальний синдром. Рентгенологічно: кальцифікати мозку. З боку органів зору – хоріоретиніт. Назвіть імовірний діагноз.", "o": ["Токсоплазмоз", "Лістеріоз", "Сифіліс", "Мікоплазменна інфекція", "Цитомегаловірусна інфекція"], "a": 0},
+      {"q": "Дитина народилася від ВІЛ-інфікованої матері. Загальний стан задовільний. По шкалі Апгар – 8 балів. Маса тіла 3200, довжина – 50 см. Передпологова, пологова та післяпологова хіміопрофілактика СНІДу не проводилась. Через який час можна визначити методом ІФА наявність ВІЛ-інфекції?", "o": ["Через 18 місяців", "Через 6 місяців", "Через 3 місяці", "Через 1 місяць", "У перші дні після народження"], "a": 0},
+      {"q": "Новонароджена дитина, термін гестації 36 тижнів, при народженні маса 2400 г, ріст 51 см. Дитина збуджена, тремор кінцівок, не смокче, виражене диспное, гепатоспленомегалія. Наприкінці першого дня з’явилася жовтяниця шкіри і слизових, на другий день – висипка на шкірі (пухирці в області грудної клітки). Який Ваш попередній діагноз?", "o": ["Внутрішньоутробна інфекція", "Гемолітична хвороба новонародженого", "Фізіологічна жовтяниця новонародженого", "Гіпоксично-ішемічна енцефалопатія", "Атрезія жовчовивідних шляхів"], "a": 0},
+      {"q": "Доношена дитина вагою 3100 г народилася від третьої вагітності. Перша вагітність – штучний аборт, друга – самовільний викидень в 12-13 тижнів. Оцінка дитини за шкалою Апгар – 9 балів. Плацента велика, масою 800 г. В першу добу з'явилося жовтушне забарвлення шкіри, дитина в'яла. У матері В(ІІІ) Rh – негативна група крові, у дитини – А(ІІ) Rh-позитивна. Збільшена печінка та селезінка. В пуповинній крові – білірубін – 80 мкмоль/л; Нb – 116 г/л, еритроцити – 2,0×1012/л, наявність молодих форм еритроцитів – нормо- та еритробластів. Яка найдоцільніша лікувальна тактика в даному випадку ?", "o": ["ОВПК", "Фототерапія", "Дезінтоксикаційна", "Покращення кон'югаційної функції печінки", "Використання ентеросорбентів"], "a": 0},
+      {"q": "Хлопчик 1 міс. поступив до клініки з приводу гідроцефалії, помірної жовтяниці. Дитина від III вагітності, що протікала із загрозою переривання, нормальних пологів, мати працює дояркою. При обстеженні виявлені: хоріоретиніт, внутрішньочерепні кальцифікати, печінка +3 см. У лікворі: ксантохромія, білок - 4,2 г/л, цитоз 60 кл., лімфоцити 70%. В крові: Нb-105 г/л, Ер-3,5 Т/л, КП-0,85, Лей- 11 Г/л, л-55%, с-25%, е-12%, м-8%. Яка найбільш вірогідна причина такого стану дитини?", "o": ["Природжений токсоплазмоз", "Внутрішньочерепна пологова травма", "Цитомегаловірусна інфекція", "Герпетична інфекція", "Природжений сифіліс"], "a": 0},
+      {"q": "Доношена дівчинка народилась від II вагітності, що протікала на фоні пієлонефриту, кольпіту. З 3-ї доби життя відзначається поява та зростання іктеричності шкіри на фоні млявості, зниження апетиту. В легенях дихання пуерильне. Тони серця приглушені. Живіт помірно здутий. Печінка +3 см. Селезінка +0,5 см. Сеча має колір \"пива\", кал звичайного кольору. Загальний білірубін -168 мкмоль/л, прямий -138 мкмоль/л. Який найбільш вірогідний діагноз?", "o": ["Внутрішньоутробний гепатит", "Гемолітична хвороба новонароджених", "Фізіологічна жовтяниця новонароджених", "Жовтяниця від материнського молока", "Атрезія жовчовивідних шляхів"], "a": 0},
+      {"q": "Хлопчик народився на 32-му тижні гестації. Через 2 години після народження з'явились дихальні розлади. Тяжкість СДР за шкалою Сільвермана 5 балів. В динаміці дихальні розлади зростають, дихальна недостатність не ліквідується при проведенні СДППТ за Мартином-Буйєром. На рентгенограмі: в легенях відзначається ретикулярно-нодозна сітка, повітряна бронхограма. Чим напевне зумовлений синдром дихальних розладів?", "o": ["Хворобою гіалінових мембран", "Сегментарними ателектазами", "Бронхолегеневою дисплазією", "Природженою емфіземою легень", "Набряково-геморагічним синдромом"], "a": 0},
+      {"q": "У новонародженої, на вигляд здорової дівчинки, на 2 добу життя спостерігаються блювання з домішками крові, мелена. Який найбільш ймовірний діагноз?", "o": ["Геморагічна хвороба новонародженного", "Пологова травма", "Тромбоцитопатія", "ДВЗ-синдром", "Вада розвитку шлунково-кишкового тракту"], "a": 0},
+      {"q": "Дитина народилася в строк, з низькою вагою, у тяжкому стані: мікроцефалія з дефектами шкіри черепа, мікрофтальмія, розщеплення губи та піднебіння, полідактилія на руках і ногах, комбінована вада серця, геніталії без чітких статевих відмінностей. Матері 38 років. Каріотип - трисомія 13. Який найбільш ймовірний діагноз?", "o": ["Синдром Патау", "Синдром Едвардса", "Синдром Дауна", "Синдром Шерешевського-Тернера", "Синдром Клайнфельтера"], "a": 0},
+      {"q": "Хлопчик народився з низькою масою. Об'єктивно: голова з виступаючою потилицею, деформація вушних раковин, короткі очні щілини, гіпертелоризм, мікрогнатія, короткі шия та грудина, маленький таз з вивихом стегон, I та V пальці знаходяться над ІІІ та ІV, п'яткововальгусні стопи, вада серця, гідро-нефроз, крипторхізм. Каріотип-трисомія 18. Який найбільш ймовірний діагноз?", "o": ["Синдром Шерешевського-Тернера", "Синдром Едвардса", "Синдром Патау", "Синдром Клайнфельтера", "Синдром Дауна"], "a": 1},
+      {"q": "Після народження дитина бліда, має аритмічне дихання, яке не поліпшується на тлі оксигенотерапії. Пульс слабкий і швидкий, артеріальний тиск важко виміряти. Набряків немає. Яка найімовірніша причина цих симптомів?", "o": ["Застійна серцева недостатність", "Внутрішньоутробний сепсис", "Асфіксія", "Внутрішньочерепний крововилив", "Внутрішньоутробна пневмонія"], "a": 2},
+      {"q": "У пологовому будинку у дитини на 3-й день життя з'явилася геморагічна висипка, блювання з кров'ю, випорожнення чорного кольору. Обстеження виявило анемію, подовження часу згортання крові, гіпопротромбінемію, нормальну кількість тромбоцитів. Яка оптимальна терапевтична тактика?", "o": ["Глюконат кальцію", "Вітамін К", "Етамзилат натрію", "Епсілон-амінокапронова кислота", "Фібриноген"], "a": 1},
+      {"q": "Доношена дитина народилася з масою тіла 3200 г, довжиною тіла 50 см, з оцінкою за шкалою Апгар 8-10 балів. Який оптимальний строк першого прикладання її до грудей?", "o": ["В перші 24 години", "В перші 6 годин", "В перші 48 годин", "Після 48 годин", "В перші 30 хвилин"], "a": 4},
+      {"q": "У дівчинки, яка народилася від 2-х термінових пологів з масою 3500 г, оцінкою за шкалою Апгар 8 балів, на 1 добу життя з'явилася жовтяниця. Непрямий білірубін в крові - 80 мкмоль/л, через 6 годин - 160 мкмоль/л. Який найбільш оптимальний метод лікування?", "o": ["Інфузійна терапія", "Ентеросорбенти", "Призначення фенобарбіталу", "Операція замінного переливання крові", "Фототерапія"], "a": 3},
+      {"q": "Дитина народилася у гестаційному віці 34 тижні у тяжкому стані. Провідними були симптоми дихальних розладів: звучний подовжений видих, участь додаткових м'язів у диханні, наявність крепітуючих хрипів на фоні жорсткого дихання. Оцінка за шкалою Сільвермана при народженні - 0 балів, через 3 години - 6 балів з наявністю клінічних даних. Який метод діагностики дозволить встановити вид пневмопатії у дитини?", "o": ["Імунологічне дослідження", "Протеїнограма", "Клінічний аналіз крові", "Рентгенологічне дослідження органів грудної клітки", "Встановлення газового складу крові"], "a": 3},
+      {"q": "У доношеної дитини від 1-ї неускладненої вагітності, обтяжених пологів, мала місце кефалогематома. На 2 добу з'явилась жовтяниця, на 3-ю - зміни в неврологічному стані: ністагм, симптом Грефе. Сеча жовта, кал золотисто-жовтого кольору. Група крові матері А (II) Rh-, дитини - А (II) Rh+. На 3 добу Hb у дитини 200 г/л, ер - 6,1×1012/л, білірубін у крові - 58 мкмоль/л за рахунок незв'язаної фракції, Ht - 0,57. Чим пояснити жовтяницю у дитини?", "o": ["Черепно-мозковою пологовою травмою", "Фізіологічною жовтяницею", "Гемолітичною хворобою новонароджених", "Атрезією жовчовивідних шляхів", "Фетальним гепатитом"], "a": 0},
+      {"q": "Дитина народилася глибоко недоношеною. Після народження у дитини наростають симптоми ДН, загальний набряк, дрiбномiхурцевi вологi хрипи над нижньою долею правої легенi. З другої доби приєднались множиннi шкiрнi екстравазати, кривава пiна з рота. На рентгенограмi органiв грудної клiтки - ателектаз нижньої долi правої легенi. Гемоглобiн кровi -100 г/л, гематокрит - 0,45. Який дiагноз найбiльш iмовiрний?", "o": ["Набряково-геморагiчний синдром", "Синдром дисемiнованого внутрiшньосудинного згортання", "Набряк легень", "Хвороба гiалiнових мембран", "Вроджена пневмонiя"], "a": 0},
+      {"q": "У 6-ти мiсячної дитини з народження наростає жовтяниця з зеленуватим вiдтiнком. Спостерiгаються явища геморагiчного дiатезу та сверблячки. Яка найбільш вірогідна патологія у дитини?", "o": ["Атрезiя жовчевивiдних шляхiв", "Еритробластоз", "Синдром Жiльбера", "Синдром Криглера-Найяра", "Синдром Дабiна-Джонсона"], "a": 0},
+      {"q": "У дитини віком 2 доби, народженої на 32-ому тижні вагітності з вагою 1700 г наростають зміни з боку дихальної системи, які з'явились через 8 годин після народження. У матері дитини - ІІІ вагітність, ІІ пологи, абортів не було. Попередня народжена дитина загинула від синдрому дихальних розладів. Об'єктивно: оцінка за шкалою Сільвермана 6 балів, дихання з порушеним ритмом, апное, звучний видих, кивання головою при диханні, зниження тонусу м'язів. При аускультацїі: дихання помірно послаблене, багато хрипів з обох боків. Рентгенологічно:наявність нодозно-ретикульозної сітки. Чим зумовлений синдром дихальних розладів у дитини?", "o": ["Синдромом гіалінових мембран", "Діафрагмальною грижею", "Ателектазами легенів", "Внутрішньоутробною пневмонією", "Набряково-геморагічним синдромом"], "a": 0},
+      {"q": "Хлопчик народився в асфіксії на 40 тижні 6-ї патологічної вагітності (мала місце загроза зриву, гестоз І типу ІІ-ї половини), від 3-х пологів. Матері 40 років. Стан дитини важкий, вага 2 кг, мають місце ознаки недозрілості, симптом гідроцефалії. Шкіра бліда, жовта, акроціаноз. Тони серця глухі, грубий систолічний шум в усіх точках аускультації. Живіт збільшений, печінка +3 см. Сеча насичена, кал світлий. Окулістом виявлено хоріоретиніт. Ваш попередній діагноз?", "o": ["Вроджений токсоплазмоз", "Гемолітична хвороба новонароджених", "Сепсис", "Вроджена вада серця", "Вроджений гепатит"], "a": 0},
+      {"q": "Хлопчику в пологовому будинку встановлено діагноз природженої вади серця (дефект міжшлуночкової перетинки). У 2-місячному віці з'явилась задишка - до 60/хв, тахікардія - до 170/хв, збільшення печінки до 3 см нижче краю реберної дуги. Які препарати необхідно призначити дитині першочергово?", "o": ["Препатари калію", "Нестероїдні протизапальні", "Серцеві глікозиди", "Бета-адреноблокатори", "Глюкокортикоїди"], "a": 2},
+      {"q": "Дитині 1 місяць. Під час пологів спостерігалась слабкість пологової діяльності, утруднення виведення плечиків. Об`єктивно: ліва рука в`яло звисає упродовж тулуба, верхня її частина повернута усередину, передпліччя проновано та зігнуто у ліктьовому суглобі, долоня повернута назад і назовні. Рефлекс Моро зліва від`ємний, рефлекси Бабкіна та Робінсона значно знижені. Виявляється м`язова гіпотонія лівої верхньої кінцівки. Яка найбільш імовірна патологія, що зумовлює таку картину ?", "o": ["Параліч Дюшена - Ерба", "Параліч Дежерін - Клюмпке", "Лівосторонній геміпарез", "Верхній парапарез", "Подвійна геміплегія"], "a": 0},
+      {"q": "У дитини віком 40 годин спостерігаються гіперестезія, пригнічення ЦНС, порушення апетиту. Є підозра на сепсис. З чим слід провести диференціальний діагноз ?", "o": ["Гіпоглікемією", "Гіпокальціємією", "Гіпербілірубінемією", "Гіперкаліємією", "Гіпомагніємією"], "a": 0},
+      {"q": "У хлопчика 4 діб життя з’явились прояви геморагічної хвороби новонароджених у вигляді мелени. Який препарат повинен був призначити лікар в перші години життя для профілактики цього захворювання?", "o": ["Вікасол", "Глюконат кальцію", "Дицинон", "Амінокапронову кислоту", "Вітамін С"], "a": 0},
+      {"q": "Вага тіла новонарожденої дитини - 2000 г. Термін гестації - 30 тижнів. Через три години після народження з'явилась задуха, акроціаноз. Об'єктивно: ЧД - 80/хв, експіраторні шуми, ЧСС – 186/хв. Перкуторно звук скорочений, вислуховується крепітація. Лікар запідозрив синдром дихальних розладів. Яке досліждення найбільш вірогідно підтвердить діагноз?", "o": ["R-графія органів дихання", "Аналіз крові", "Біохімічне дослідження сироватки крові", "Вимірювання артеріального тиску", "Електрокардіографія"], "a": 0},
+      {"q": "Мати новонардженої дитини страждає хронічним пієлонефритом, перед пологами перенесла ГРВІ. Пологи термінові, тривалий безводний період. На 2-й день у дитини з'явилося еритематозне висипання, в подальшому - пухирі розміром біля 1см, наповнені серозно-гнійним вмістом. Симптом Нікольского позитивний. Після розтинання пухирів з’являються ерозії. Дитина млява. Температура тіла субфебрильна. Який найбільш ймовірний діагноз?", "o": ["Пухирчатка новонародженого", "Везикулопустульоз", "Псевдофурункульоз", "Сепсис", "Дерматит Ріттера"], "a": 0},
+      {"q": "Дитина народилася від ІІ передчасних пологів з вагою тіла 1800 г з оцінкою за шкалою Апгар 7 балів, за шкалою Сільверман – 3 бали. Через 2 години після народження стан дитини погіршав. Дитина почала стогнати, з’явилася задишка, периоральний та акроціаноз. Видих утруднений, звучний. Перкуторно над легенями – тимпаніт, аускультативно – розсіяна крепіпітація. Тахікардія. Який найбільш вірогідний діагноз?", "o": ["Синдром дихальних розладів", "Внутрішньоутробна пневмонія", "Аспіраційна пневмонія", "Перинатальне ураження ЦНС", "Бронхолегенева дисплазія"], "a": 0},
+      {"q": "У переношеного новонародженого, що народився на 43-му тижні вагітності відмічається апное, блідість, дитина покрита зеленуватою амніотичною рідиною. Перші кроки в реанімації новонародженого включають:", "o": ["Відсмоктування вмісту трахеї", "Штучна вентиляція із застосуванням маски з мішком", "Штучна вентиляція із застосуванням ендотрахеальної трубки", "Застосування 100% кисню", "Катетеризація умбілікальної вени"], "a": 0},
+      {"q": "У новонародженого терміном ґестації 31 тиждень спостерігаються гіпотонія та пригнічення свідомості. Гематокрит 35%, а в загальному аналізі ліквору виявлено підвищену кількість еритроцитів, білка та знижений вміст глюкози. Ці дані відповідають клінічній картині:", "o": ["Внутрішньочерепного крововиливу", "Менінгіту", "Сепсису", "Анемії", "Внутрішньоутробної інфекції"], "a": 0},
+      {"q": "У новонародженого з пупкової ранки гнійні виділення, шкіра навколо пупка припухла. Шкіра бліда, з жовто-сірим відтінком, генералізована геморагічна висипка. Температура тіла носить гектичний характер. Який з перечислених діагнозів найбільш імовірний?", "o": ["Сепсис", "Геморагічна хвороба новонароджених", "Гемолітична хвороба новонароджених", "Тромбоцитопатія", "Омфаліт"], "a": 0},
+      {"q": "У дитини на 3-ю добу життя шкіра набула жовтушний колір. Дитина народилась з вагою 3,200 кг, довжина тіла 52 см. Активна. Над легенями пуерильне дихання. ЧДР- 36/хв. Тони серця ритмічні. ЧСС- 130/хв. Живіт м'який. Печінка виступає з-під реберної дуги на 2 см, селезінка не пальпується. Випорожнення у вигляді меконію. Який найбільш вірогідний діагноз?", "o": ["Фізіологічна жовтяниця", "Гемолітична хвороба новонароджених", "Сепсис новонароджених", "Анемія Міньковського-Шафара", "Атрезія жовчних шляхів"], "a": 0},
+      {"q": "У новонародженого з асфіксією при народженні відзначалися апное та брадикардія (частота серцевих скорочень 70 ударів за хвилину), була негайно почата штучна вентиляція легень із 100% киснем із застосуванням маски та мішка Амбу. Через 30 секунд серцевий ритм не змінився. Яким повинен бути наступний крок реанімаційних заходів?", "o": ["Непрямий масаж серця", "Тактильна стимуляція", "Продовжити вентиляцію", "Натрію гідрокарбонат внутрішньовенно", "Епінефрин внутрішньовенно"], "a": 0},
+      {"q": "У доношеної дитини, яка народилася з обвиттям пуповини навколо шиї, на 1-й хв. життя відмічається тотальний ціаноз, апное, ЧСС – 80 в хв., м’язова гіпотонія і арефлексія. Ознак аспірації меконію немає. Після санації дихальних шляхів дихання не з’явилось. Ваша наступна дія?", "o": ["ШВЛ за допомогою маски 100% О2", "В/в введення адреналіну", "В/в введення етамзілат", "Інтубація трахеї та ШВЛ", "Подразнення шкіри вздовж хребта"], "a": 0},
+      {"q": "Новонароджена дитина в терміні гестації 38 тижнів з масою 3400г, довжиною 54см. Загальний стан при народженні середньої тяжкості, що обумовлено асфіксією середнього ступеня важкості. Після проведення первинних реанімаційних заходів з’явилося самостійне дихання, частота серцевих скорочень 110 ударів за хвилину, спостерігається акроціаноз. Яка наступна дія лікаря-неонатолога у даній ситуації?", "o": ["Додаткова оксигенація", "Інтубація трахеї", "Штучний масаж серця", "Відсмоктування слизу з верхніх дихальних шляхів", "Допоміжна вентиляція легенів"], "a": 0},
+      {"q": "Доношена дівчинка від ІІ вагітності, яка перебігала з загрозою переривання на 25-27 тижнях, хронічною фетоплацентарною недостатністю. В пологах – однократне туге обвиття пуповини навколо шиї плода, утруднення виведення плечиків. Після народження дитина оцінена за шкалою Апгар на 1 хвилині: дихання відсутнє, ЧСС – 50 за хв., тотальний ціаноз, атонія, арефлексія. Яка оцінка за шкалою Апгар у данному випадку?", "o": ["1 бал", "2 бали", "3 бали", "4 бали", "0 балів"], "a": 0},
+      {"q": "Дитина народилася добу тому. У пологах утруднене виведення плечиків. Маса тіла 4300,0. Об'єктивно: права рука звисає вздовж тулуба, кисть пронована, рухи у руці відсутні. Позитивний симптом шарфа. Вкажіть найбільш вірогідний діагноз:", "o": ["Тотальний правобічний акушерський параліч", "Геміпарез", "Тетрапарез", "Проксимальний тип правобічного акушерського паралічу", "Дистальний тип правобічного акушерського паралічу"], "a": 0},
+      {"q": "Немовля народилося вчасно. Пологи патологічні, сідницями вперед. При огляді дитини: обмеження відведення правої нижньої кінцівки до 50o, позитивний симптом луску з правого боку. Асиметрія пахвинних складок. Який найбільш вірогідний діагноз?", "o": ["Вроджений вивих правого стегна", "Дисплазія правого стегна", "Вроджений вивих стегон", "Варусна деформація шийок стегон", "Перелом шийок стегнових кісток"], "a": 0},
+      {"q": "У новонародженого після патологічних пологів з першого дня життя відсутні активні рухи у правій руці. Стан порушений. Рефлекс Моро праворуч не викликається. Різко знижені сухожилково-периостальні рефлекси на ураженій руці. Який найбільш вірогідний діагноз?", "o": ["Травматичний плексит, тотальний тип", "Внутрішньочерепна пологова травма", "Травматичний перелом правої плечової кістки", "Остеомієліт правої плечової кістки", "Травматичний плексит, дистальний тип"], "a": 0},
+      {"q": "Доношена дитина перенесла анте- та інтранатальну гіпоксію, народилася в асфіксії (оцінка за шкалою Апгар 2-5 балів). Після народження у дитини прогресує збудження, відзначаються блювання, ністагм, судоми, косоокість, спонтанні рефлекси Моро та Бабинського. Яка локалізація внутрішньочерепного крововиливу найбільш вірогідна?", "o": ["Субдуральний крововилив", "Крововиливи в шлуночки мозку", "Субарахноїдальний крововилив", "Перивентрикулярні крововиливи", "Дрібні крововиливи в тканину мозку"], "a": 2},
+      {"q": "Новонароджена дитина після пологів загальмована, рухи повільні. Народилася з нормальною вагою від 4-ї вагітності у матері 28 років. Вагітність перебігала без ускладнень, пологи швидкі, було застосовано місцеву анестезію та в/в введення промедолу. Що з запропонованого слід зробити для поліпшення стану новнародженого?", "o": ["Запросити на консультацію невропатолога", "Ввести налоксон", "Ввести вітамін К", "Досліджувати концентрацію електролітів сироватки крові", "Провести інфузію 10% розчину глюкози"], "a": 1},
+      {"q": "Дитина віком 1 тиждень надійшла до приймального відділення у зв'язку з гострим початком хвороби. Об-но: блювання з домішками жовчі. Оглядовий знімок черевної порожнини вказує на обструкцію дванадцятипалої кишки. За допомогою барієвої клізми виявлено диспозицію сліпої кишки. Який найбільш вірогідний діагноз?", "o": ["Гіпертрофічний стеноз пілоричного відділу шлунку", "Вроджена патологія кишечнику (порушення ротації кишечнику)", "Інвагінація кишечнику", "Атрезія порожньої кишки", "Гострий апендицит"], "a": 1},
+      {"q": "У новонародженої дівчинки на 4 добу спостерігається набухання молочних залоз із виділенням секрету, набухання вульви, кров'янисті виділення зі статевих шляхів. Яка найбільш вірогідна причина цього стану?", "o": ["Прийом матір'ю гормонів під час вагітності", "Тестикулярна фемінізація", "Підвищення рівня тиреотропного гормону у новонародженої", "Гранульозоклітинна пухлина", "Перехід естрогенів матері до плоду"], "a": 4},
+      {"q": "У новонародженого, що перенiс асфiксiю у пологах, на 3-тю добу життя з’явилася кровотеча з пупкової ранки. Лабораторно - гiпокоагуляцiя, тромбоцитопенiя, гiпотромбiнемiя. Чим зумовленi клiнiко-лабораторнi змiни?", "o": ["ДВЗ-синдром", "Геморагiчна хвороба новонароджених", "Вроджена ангiопатiя", "Тромбоцитопенiчна пурпура", "Травма пупкової судини"], "a": 0},
+      {"q": "У новонародженої дитини через 10 днiв пiсля народження раптово пiдвищилася температура до 39ºC. Об’єктивно: на еритематознiй шкiрi в дiлянцi пупка, живота та грудей з’явилися множиннi мiхури величиною з горошину, без iнфiльтрацiї в основi, мiсцями визначаються яскраво-червонi вологi ерозiї з обривками епiдермiсу по периферiї. Вкажiть попереднiй дiагноз:", "o": ["Епiдемiчна пухирчатка новонароджених", "Сифiлiтична пухирчатка", "Стрептококове iмпетиго", "Вульгарне iмпетиго", "Алергiчний дерматит"], "a": 0},
+      {"q": "На 8-му добу життя у дитини, яка народилась у строк, з масою 3500 г, пiднялась температура тiла до 37,5ºC, стала мляво брати груди. Дитина була прикладена до грудей матерi на 3-тю добу в зв’язку з пiсляпологовим ендометритом у матерi. Об’єктивно: дитина активна. На шкiрi грудей, живота, стегон виявленi поверхневi в’ялi пухирi числом 10, дiаметром 5-10 мм, з мутним вмiстом. Деякi з них зруйнувались, при цьому з’явилась яскраво-рожева поверхня. З боку внутрiшнiх органiв змiн немає. Вкажiть найбiльш iмовiрний дiагноз:", "o": ["Пухирчатка новонароджених", "Везикулопустульоз", "Ексфолiативний дерматит Рiттера", "Синдром Лайєла", "Iнфiкована попрiлiсть"], "a": 0}
+    ];
+
+    // Додаємо вихідний індекс (1..84)
+    const QUESTIONS = RAW_QUESTIONS.map((item, idx) => ({
+      id: idx + 1,
+      q: item.q,
+      o: item.o,
+      a: item.a
+    }));
+
+    const LETTERS = ['A', 'B', 'C', 'D', 'E'];
+
+    // Стан застосунку
+    let state = {
+      countMode: 'all',
+      shuffleQ: true,
+      shuffleO: true,
+      instantCheck: true,
+      quizItems: [], // { origId, q, options: [{text, isCorrect}], userSelected: number|null }
+      currentIndex: 0,
+      secondsElapsed: 0,
+      timerInterval: null,
+      isFinished: false
+    };
+
+    // DOM елементи
+    const screens = {
+      start: document.getElementById('startScreen'),
+      quiz: document.getElementById('quizScreen'),
+      results: document.getElementById('resultsScreen'),
+      cheat: document.getElementById('cheatScreen')
+    };
+
+    function showScreen(name) {
+      Object.keys(screens).forEach(key => {
+        screens[key].classList.toggle('hidden', key !== name);
+      });
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // Тема (світла / темна)
+    const themeToggleBtn = document.getElementById('themeToggleBtn');
+    const themeIconSun = document.getElementById('themeIconSun');
+    const themeIconMoon = document.getElementById('themeIconMoon');
+
+    function applyTheme(theme) {
+      document.documentElement.setAttribute('data-theme', theme);
+      localStorage.setItem('neonat_theme', theme);
+      if (theme === 'dark') {
+        themeIconSun.classList.remove('hidden');
+        themeIconMoon.classList.add('hidden');
+      } else {
+        themeIconSun.classList.add('hidden');
+        themeIconMoon.classList.remove('hidden');
+      }
+    }
+
+    const savedTheme = localStorage.getItem('neonat_theme') ||
+      (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+    applyTheme(savedTheme);
+
+    themeToggleBtn.addEventListener('click', () => {
+      const current = document.documentElement.getAttribute('data-theme');
+      applyTheme(current === 'dark' ? 'light' : 'dark');
+    });
+
+    // Вибір режиму кількості питань
+    const countModeGrid = document.getElementById('countModeGrid');
+    const rangeBox = document.getElementById('rangeBox');
+    const rangeFrom = document.getElementById('rangeFrom');
+    const rangeTo = document.getElementById('rangeTo');
+    const rangeCountLabel = document.getElementById('rangeCountLabel');
+
+    function updateRangeLabel() {
+      let from = Math.max(1, Math.min(84, parseInt(rangeFrom.value) || 1));
+      let to = Math.max(1, Math.min(84, parseInt(rangeTo.value) || 84));
+      if (from > to) [from, to] = [to, from];
+      const count = to - from + 1;
+      rangeCountLabel.textContent = `(${count} ${pluralQuestions(count)})`;
+    }
+
+    function pluralQuestions(n) {
+      const mod10 = n % 10;
+      const mod100 = n % 100;
+      if (mod10 === 1 && mod100 !== 11) return 'питання';
+      if (mod10 >= 2 && mod10 <= 4 && (mod100 < 12 || mod100 > 14)) return 'питання';
+      return 'питань';
+    }
+
+    rangeFrom.addEventListener('input', updateRangeLabel);
+    rangeTo.addEventListener('input', updateRangeLabel);
+
+    countModeGrid.addEventListener('click', (e) => {
+      const pill = e.target.closest('.mode-pill');
+      if (!pill) return;
+      document.querySelectorAll('.mode-pill').forEach(p => p.classList.remove('active'));
+      pill.classList.add('active');
+      state.countMode = pill.dataset.mode;
+      rangeBox.classList.toggle('visible', state.countMode === 'range');
+    });
+
+    // Утиліта перемішування Фішера — Єйтса
+    function shuffleArray(arr) {
+      const copy = [...arr];
+      for (let i = copy.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [copy[i], copy[j]] = [copy[j], copy[i]];
+      }
+      return copy;
+    }
+
+    // Форматування часу
+    function formatTime(sec) {
+      const m = Math.floor(sec / 60).toString().padStart(2, '0');
+      const s = (sec % 60).toString().padStart(2, '0');
+      return `${m}:${s}`;
+    }
+
+    // Запуск тесту
+    function startQuiz(customSourceQuestions = null) {
+      state.shuffleQ = document.getElementById('optShuffleQ').checked;
+      state.shuffleO = document.getElementById('optShuffleO').checked;
+      state.instantCheck = document.getElementById('optInstant').checked;
+
+      let pool = [];
+
+      if (customSourceQuestions) {
+        pool = [...customSourceQuestions];
+      } else if (state.countMode === 'range') {
+        let from = Math.max(1, Math.min(84, parseInt(rangeFrom.value) || 1));
+        let to = Math.max(1, Math.min(84, parseInt(rangeTo.value) || 84));
+        if (from > to) [from, to] = [to, from];
+        rangeFrom.value = from;
+        rangeTo.value = to;
+        pool = QUESTIONS.slice(from - 1, to);
+        if (state.shuffleQ) pool = shuffleArray(pool);
+      } else {
+        pool = state.shuffleQ ? shuffleArray(QUESTIONS) : [...QUESTIONS];
+        if (state.countMode !== 'all') {
+          const limit = parseInt(state.countMode, 10);
+          pool = pool.slice(0, limit);
+        }
+      }
+
+      state.quizItems = pool.map(item => {
+        let opts = item.o.map((text, idx) => ({
+          text,
+          isCorrect: idx === item.a
+        }));
+        if (state.shuffleO) {
+          opts = shuffleArray(opts);
+        }
+        return {
+          origId: item.id,
+          q: item.q,
+          options: opts,
+          userSelected: null
+        };
+      });
+
+      state.currentIndex = 0;
+      state.secondsElapsed = 0;
+      state.isFinished = false;
+
+      clearInterval(state.timerInterval);
+      document.getElementById('timerBadge').textContent = '00:00';
+      state.timerInterval = setInterval(() => {
+        state.secondsElapsed++;
+        document.getElementById('timerBadge').textContent = formatTime(state.secondsElapsed);
+      }, 1000);
+
+      showScreen('quiz');
+      renderQuizQuestion();
+    }
+
+    // Рендер поточного питання
+    function renderQuizQuestion() {
+      const total = state.quizItems.length;
+      const idx = state.currentIndex;
+      const item = state.quizItems[idx];
+
+      document.getElementById('qCounterBadge').textContent = `Питання ${idx + 1} / ${total}`;
+      document.getElementById('origNumLabel').textContent = `Питання з бази №${item.origId}`;
+      document.getElementById('questionText').textContent = item.q;
+
+      // Підрахунок статистики
+      let correctCount = 0;
+      let wrongCount = 0;
+      let answeredCount = 0;
+      state.quizItems.forEach(qItem => {
+        if (qItem.userSelected !== null) {
+          answeredCount++;
+          if (qItem.options[qItem.userSelected].isCorrect) correctCount++;
+          else wrongCount++;
+        }
+      });
+
+      const correctBadge = document.getElementById('correctBadge');
+      const wrongBadge = document.getElementById('wrongBadge');
+      if (state.instantCheck) {
+        correctBadge.classList.remove('hidden');
+        wrongBadge.classList.remove('hidden');
+        correctBadge.textContent = `✓ ${correctCount}`;
+        wrongBadge.textContent = `✕ ${wrongCount}`;
+      } else {
+        correctBadge.classList.add('hidden');
+        wrongBadge.classList.add('hidden');
+      }
+
+      const progressPct = Math.round(((idx + 1) / total) * 100);
+      document.getElementById('progressFill').style.width = `${progressPct}%`;
+
+      // Варіанти відповідей
+      const optionsList = document.getElementById('optionsList');
+      optionsList.innerHTML = '';
+
+      const isAnswered = item.userSelected !== null;
+      const lockOptions = state.instantCheck && isAnswered;
+
+      item.options.forEach((opt, optIdx) => {
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'option-btn';
+
+        if (lockOptions) {
+          btn.classList.add('locked');
+          if (opt.isCorrect) {
+            btn.classList.add('correct');
+          } else if (item.userSelected === optIdx) {
+            btn.classList.add('wrong');
+          }
+        } else if (item.userSelected === optIdx) {
+          btn.classList.add('selected');
+        }
+
+        btn.innerHTML = `
+          <span class="option-letter">${LETTERS[optIdx]}</span>
+          <span>${escapeHtml(opt.text)}</span>
+        `;
+
+        btn.addEventListener('click', () => handleOptionSelect(optIdx));
+        optionsList.appendChild(btn);
+      });
+
+      // Кнопки навігації
+      document.getElementById('prevBtn').disabled = idx === 0;
+      const nextBtn = document.getElementById('nextBtn');
+      if (idx === total - 1) {
+        nextBtn.textContent = 'Завершити тест ✓';
+      } else {
+        nextBtn.textContent = 'Далі →';
+      }
+
+      renderNavDots();
+    }
+
+    function handleOptionSelect(optIdx) {
+      const item = state.quizItems[state.currentIndex];
+      if (state.instantCheck && item.userSelected !== null) return;
+
+      item.userSelected = optIdx;
+      renderQuizQuestion();
+    }
+
+    function renderNavDots() {
+      const navGrid = document.getElementById('navGrid');
+      navGrid.innerHTML = '';
+
+      state.quizItems.forEach((item, idx) => {
+        const dot = document.createElement('button');
+        dot.type = 'button';
+        dot.className = 'nav-dot';
+        dot.textContent = idx + 1;
+
+        if (idx === state.currentIndex) {
+          dot.classList.add('current');
+        }
+
+        if (item.userSelected !== null) {
+          if (state.instantCheck) {
+            const isOk = item.options[item.userSelected].isCorrect;
+            dot.classList.add(isOk ? 'dot-correct' : 'dot-wrong');
+          } else {
+            dot.classList.add('answered');
+          }
+        }
+
+        dot.addEventListener('click', () => {
+          state.currentIndex = idx;
+          renderQuizQuestion();
+        });
+
+        navGrid.appendChild(dot);
+      });
+    }
+
+    // Перехід між питаннями
+    document.getElementById('prevBtn').addEventListener('click', () => {
+      if (state.currentIndex > 0) {
+        state.currentIndex--;
+        renderQuizQuestion();
+      }
+    });
+
+    document.getElementById('nextBtn').addEventListener('click', () => {
+      if (state.currentIndex < state.quizItems.length - 1) {
+        state.currentIndex++;
+        renderQuizQuestion();
+      } else {
+        tryFinishQuiz();
+      }
+    });
+
+    // Модальне вікно підтвердження
+    const confirmModal = document.getElementById('confirmModal');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalText = document.getElementById('modalText');
+    let modalConfirmCallback = null;
+
+    function openConfirmModal(title, text, onConfirm) {
+      modalTitle.textContent = title;
+      modalText.textContent = text;
+      modalConfirmCallback = onConfirm;
+      confirmModal.classList.add('open');
+    }
+
+    document.getElementById('modalCancelBtn').addEventListener('click', () => {
+      confirmModal.classList.remove('open');
+    });
+
+    document.getElementById('modalConfirmBtn').addEventListener('click', () => {
+      confirmModal.classList.remove('open');
+      if (modalConfirmCallback) modalConfirmCallback();
+    });
+
+    function tryFinishQuiz() {
+      const unanswered = state.quizItems.filter(i => i.userSelected === null).length;
+      if (unanswered > 0) {
+        openConfirmModal(
+          'Завершити тестування?',
+          `Залишилось питань без відповіді: ${unanswered}. Непропущені питання зарахуються як помилкові. Завершити зараз?`,
+          finishQuiz
+        );
+      } else {
+        finishQuiz();
+      }
+    }
+
+    document.getElementById('finishEarlyBtn').addEventListener('click', tryFinishQuiz);
+
+    // Завершення тесту та підрахунок результатів
+    function finishQuiz() {
+      clearInterval(state.timerInterval);
+      state.isFinished = true;
+
+      const total = state.quizItems.length;
+      let correct = 0;
+      state.quizItems.forEach(item => {
+        if (item.userSelected !== null && item.options[item.userSelected].isCorrect) {
+          correct++;
+        }
+      });
+      const wrong = total - correct;
+      const pct = total > 0 ? Math.round((correct / total) * 100) : 0;
+
+      const scoreCircle = document.getElementById('scoreCircle');
+      scoreCircle.classList.remove('high', 'low');
+      if (pct >= 80) scoreCircle.classList.add('high');
+      else if (pct < 60) scoreCircle.classList.add('low');
+
+      document.getElementById('scorePercent').textContent = `${pct}%`;
+      document.getElementById('statCorrect').textContent = correct;
+      document.getElementById('statWrong').textContent = wrong;
+      document.getElementById('statTime').textContent = formatTime(state.secondsElapsed);
+
+      let verdict = 'Гарний результат!';
+      if (pct >= 90) verdict = 'Відмінно! Готовий до іспиту!';
+      else if (pct >= 75) verdict = 'Добре! Ще трохи практики.';
+      else if (pct >= 60) verdict = 'Задовільно, варто повторити помилки.';
+      else verdict = 'Потрібно ще потренуватись.';
+
+      document.getElementById('resultVerdict').textContent = verdict;
+      document.getElementById('resultSubtext').textContent = `Правильних відповідей: ${correct} із ${total}`;
+
+      const retryMistakesBtn = document.getElementById('retryMistakesBtn');
+      if (wrong > 0) {
+        retryMistakesBtn.classList.remove('hidden');
+        retryMistakesBtn.textContent = `Робота над помилками (${wrong})`;
+      } else {
+        retryMistakesBtn.classList.add('hidden');
+      }
+
+      document.getElementById('onlyMistakesFilter').checked = false;
+      renderReviewList();
+      showScreen('results');
+    }
+
+    // Рендер розбору відповідей
+    function renderReviewList() {
+      const onlyMistakes = document.getElementById('onlyMistakesFilter').checked;
+      const reviewList = document.getElementById('reviewList');
+      reviewList.innerHTML = '';
+
+      let shown = 0;
+
+      state.quizItems.forEach((item, idx) => {
+        const isCorrect = item.userSelected !== null && item.options[item.userSelected].isCorrect;
+        if (onlyMistakes && isCorrect) return;
+        shown++;
+
+        const div = document.createElement('div');
+        div.className = `review-item ${isCorrect ? 'is-correct' : 'is-wrong'}`;
+
+        let optsHtml = '';
+        item.options.forEach((opt, oIdx) => {
+          let cls = 'review-opt';
+          let prefix = `${LETTERS[oIdx]}.`;
+          if (opt.isCorrect) {
+            cls += ' opt-correct';
+            prefix = `✓ ${LETTERS[oIdx]}.`;
+          } else if (item.userSelected === oIdx) {
+            cls += ' opt-user-wrong';
+            prefix = `✕ ${LETTERS[oIdx]}.`;
+          }
+          optsHtml += `<div class="${cls}"><span>${prefix}</span><span>${escapeHtml(opt.text)}</span></div>`;
+        });
+
+        const statusTag = item.userSelected === null
+          ? `<span style="color: var(--warning); font-size: 12px; font-weight: 700;">• Без відповіді</span>`
+          : (isCorrect
+              ? `<span style="color: var(--success); font-size: 12px; font-weight: 700;">• Правильно</span>`
+              : `<span style="color: var(--danger); font-size: 12px; font-weight: 700;">• Помилка</span>`);
+
+        div.innerHTML = `
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+            <span style="font-size: 12px; color: var(--text-muted); font-weight: 600;">Питання #${idx + 1} (База №${item.origId})</span>
+            ${statusTag}
+          </div>
+          <div class="review-q">${escapeHtml(item.q)}</div>
+          <div>${optsHtml}</div>
+        `;
+        reviewList.appendChild(div);
+      });
+
+      if (shown === 0) {
+        reviewList.innerHTML = `<div style="text-align: center; padding: 20px; color: var(--text-secondary);">Помилок немає! Усі відповіді правильні.</div>`;
+      }
+    }
+
+    document.getElementById('onlyMistakesFilter').addEventListener('change', renderReviewList);
+
+    // Робота над помилками
+    document.getElementById('retryMistakesBtn').addEventListener('click', () => {
+      const mistakeIds = new Set();
+      state.quizItems.forEach(item => {
+        const isCorrect = item.userSelected !== null && item.options[item.userSelected].isCorrect;
+        if (!isCorrect) mistakeIds.add(item.origId);
+      });
+      const mistakeQuestions = QUESTIONS.filter(q => mistakeIds.has(q.id));
+      if (mistakeQuestions.length > 0) {
+        startQuiz(mistakeQuestions);
+      }
+    });
+
+    document.getElementById('restartSameBtn').addEventListener('click', () => {
+      const sameIds = state.quizItems.map(i => i.origId);
+      const sameQuestions = QUESTIONS.filter(q => sameIds.includes(q.id));
+      startQuiz(sameQuestions);
+    });
+
+    // Шпаргалка / Пошук
+    function renderCheatSheet(filterText = '') {
+      const query = filterText.trim().toLowerCase();
+      const cheatList = document.getElementById('cheatList');
+      cheatList.innerHTML = '';
+
+      const filtered = QUESTIONS.filter(item => {
+        if (!query) return true;
+        if (item.q.toLowerCase().includes(query)) return true;
+        return item.o.some(opt => opt.toLowerCase().includes(query));
+      });
+
+      document.getElementById('cheatCountInfo').textContent = `Знайдено питань: ${filtered.length} із ${QUESTIONS.length}`;
+
+      filtered.forEach(item => {
+        const div = document.createElement('div');
+        div.className = 'review-item';
+
+        let optsHtml = '';
+        item.o.forEach((optText, idx) => {
+          const isRight = idx === item.a;
+          optsHtml += `
+            <div class="review-opt ${isRight ? 'opt-correct' : ''}">
+              <span>${isRight ? '✓' : LETTERS[idx] + '.'}</span>
+              <span>${escapeHtml(optText)}</span>
+            </div>
+          `;
+        });
+
+        div.innerHTML = `
+          <div style="font-size: 12px; color: var(--text-muted); font-weight: 600; margin-bottom: 4px;">База №${item.id}</div>
+          <div class="review-q">${escapeHtml(item.q)}</div>
+          <div>${optsHtml}</div>
+        `;
+        cheatList.appendChild(div);
+      });
+    }
+
+    document.getElementById('cheatSearchInput').addEventListener('input', (e) => {
+      renderCheatSheet(e.target.value);
+    });
+
+    function openCheatSheet() {
+      clearInterval(state.timerInterval);
+      renderCheatSheet(document.getElementById('cheatSearchInput').value);
+      showScreen('cheat');
+    }
+
+    // Навігаційні кнопки
+    document.getElementById('startQuizBtn').addEventListener('click', () => startQuiz());
+    document.getElementById('openCheatBtn').addEventListener('click', openCheatSheet);
+    document.getElementById('headerCheatBtn').addEventListener('click', openCheatSheet);
+    document.getElementById('closeCheatBtn').addEventListener('click', () => showScreen('start'));
+    document.getElementById('toMenuBtn').addEventListener('click', () => showScreen('start'));
+    document.getElementById('homeBtn').addEventListener('click', () => {
+      clearInterval(state.timerInterval);
+      showScreen('start');
+    });
+
+    // Підтримка клавіатури під час тесту
+    document.addEventListener('keydown', (e) => {
+      if (screens.quiz.classList.contains('hidden')) return;
+      if (confirmModal.classList.contains('open')) return;
+
+      const key = e.key;
+      if (['1', '2', '3', '4', '5'].includes(key)) {
+        const optIdx = parseInt(key, 10) - 1;
+        const item = state.quizItems[state.currentIndex];
+        if (item && optIdx < item.options.length) {
+          handleOptionSelect(optIdx);
+        }
+      } else if (key === 'Enter' || key === 'ArrowRight') {
+        e.preventDefault();
+        document.getElementById('nextBtn').click();
+      } else if (key === 'ArrowLeft') {
+        e.preventDefault();
+        document.getElementById('prevBtn').click();
+      }
+    });
+
+    function escapeHtml(str) {
+      return str
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
+    }
+  </script>
+</body>
+</html>
